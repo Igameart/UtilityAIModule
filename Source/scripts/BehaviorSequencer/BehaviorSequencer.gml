@@ -122,14 +122,6 @@ function BehaviorSequencer(_designator, _agent, _exclusive, _completionDelay, _l
     /// @param {Action} _action The action object to execute.
     /// @param {real} delayOverride An optional delay override.
     function TakeAction(_action, delayOverride) {
-        trace("TakeAction called", {_action, delayOverride});
-        if (debug) show_debug_message("Executing Action: " + _action.name);
-        if (!CheckConditions(_action.conditions)) {
-            trace("Conditions not met for action: " + _action.name);
-            if (debug) show_debug_message("Conditions not met for action: " + _action.name);
-            return;
-        }
-        trace("All conditions met", _action.conditions);
 		
         var actionDelay = (delayOverride > 0) ? delayOverride : _action.actionDelay;
 		

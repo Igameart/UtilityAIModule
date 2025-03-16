@@ -36,19 +36,6 @@ function UtilityModule(_agent) constructor {
         sequenceDesignator = _sequenceName;
         utilityGraph = new AnimationCurve();
         utilityDisplay = undefined;
-        conditions = [];
-
-        /// @function AddCondition(_stat, _value, _comparator)
-        /// @description Adds a condition to the directive.
-        /// @param {string} _stat The stat to check.
-        /// @param {any} _value The value to compare against.
-        /// @param {function} _comparator The comparison function.
-        /// @returns {Condition} The created condition.
-        function AddCondition(_stat, _value, _comparator) {
-            var condition = new Condition("condition", _stat, _value, _comparator);
-            array_push(conditions, condition);
-            return condition;
-        }
     }
 
     /// @function OnValidate()

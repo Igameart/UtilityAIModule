@@ -45,13 +45,10 @@ behavior_work = new BehaviorSequencer("Working", agent, false, 0, true);
 behavior_sleep = new BehaviorSequencer("Sleeping", agent, false, 0, true);
 
 var directive_eat = new utility_ai.Directive("Eat", 0.1, undefined, 0, 0.5, false, 0.7, behavior_eat, "Eating");
-directive_eat.AddCondition("hunger", 0.5, GreaterThanOrEqualTo);
 
 var directive_work = new utility_ai.Directive("Work", 0.1, undefined, 0, 0.5, false, 0.6, behavior_work, "Working");
-directive_work.AddCondition("has_money", false, EqualTo);
 
 var directive_sleep = new utility_ai.Directive("Sleep", 0.1, undefined, 0, 0.5, false, 0.5, behavior_sleep, "Sleeping");
-directive_sleep.AddCondition("tiredness", 0.5, GreaterThanOrEqualTo);
 
 array_push(utility_ai.directives, directive_eat);
 array_push(utility_ai.directives, directive_work);
