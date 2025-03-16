@@ -21,18 +21,23 @@ agent.ai_brain = utility_ai;
 
 function MessageEat() {
     show_debug_message("AI is eating...");
-    trace(other);
-    other.ai_brain.SatisfyDirective("Eat");
+    //with other{
+	//	trace(self);
+	//	ApplyEffects();
+	//}
+    ai_brain.SatisfyDirective("Eat");
 }
 
 function MessageWork() {
     show_debug_message("AI is working...");
-    other.ai_brain.SatisfyDirective("Work");
+    //with other ApplyEffects();
+    ai_brain.SatisfyDirective("Work");
 }
 
 function MessageSleep() {
     show_debug_message("AI is sleeping...");
-    other.ai_brain.SatisfyDirective("Sleep");
+    //with other ApplyEffects();
+    ai_brain.SatisfyDirective("Sleep");
 }
 
 behavior_eat = new BehaviorSequencer("Eating", agent, false, 0, true);
@@ -73,9 +78,9 @@ var effects_sleep = [
     new Effect("tiredness", 0.1)
 ];
 
-var action_eat = new Action("Eating", 10, 5, preconditions_eat, effects_eat, MessageEat, [{directive: "Eat", value: 0.8}]);
-var action_work = new Action("Working", 20, 10, preconditions_work, effects_work, MessageWork, [{directive: "Work", value: 0.6}]);
-var action_sleep = new Action("Sleeping", 15, 8, preconditions_sleep, effects_sleep, MessageSleep, [{directive: "Sleep", value: 0.7}]);
+var action_eat = new Action("Eating", 10, 2, preconditions_eat, effects_eat, MessageEat, [{directive: "Eat", value: 0.8}]);
+var action_work = new Action("Working", 20, 2, preconditions_work, effects_work, MessageWork, [{directive: "Work", value: 0.6}]);
+var action_sleep = new Action("Sleeping", 15, 2, preconditions_sleep, effects_sleep, MessageSleep, [{directive: "Sleep", value: 0.7}]);
 
 array_push(agent.actions, action_eat);
 array_push(agent.actions, action_work);

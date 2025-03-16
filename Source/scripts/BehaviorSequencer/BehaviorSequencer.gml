@@ -47,17 +47,17 @@ function Action(_name, _cost, _actionDelay, _conditions, _effects, _message, _sa
 /// @param {real} _completionDelay The delay before the sequence completes.
 /// @param {bool} _loop Whether the sequence loops.
 function BehaviorSequencer(_designator, _agent, _exclusive, _completionDelay, _loop) constructor {
-    static designator = _designator;
-    static agent = _agent;
-    static exclusive = _exclusive;
-    static completionDelay = _completionDelay;
-    static loop = _loop;
-    static sequence = [];
-    static debug = true;
-    static currentIndex = 0;
-    static active = false;
-    static time_sources = [];
-    static currentAction = noone;
+    designator = _designator;
+    agent = _agent;
+    exclusive = _exclusive;
+    completionDelay = _completionDelay;
+    loop = _loop;
+    sequence = [];
+    debug = true;
+    currentIndex = 0;
+    active = false;
+    time_sources = [];
+    currentAction = noone;
 
     /// @function StartSequence(_designator)
     /// @description Starts the sequence.
@@ -109,10 +109,11 @@ function BehaviorSequencer(_designator, _agent, _exclusive, _completionDelay, _l
     /// @function ApplyEffects(effects)
     /// @description Applies the effects to the agent.
     /// @param {array<Effect>} effects An array of effect objects.
-    function ApplyEffects(effects) {
-        for (var i = 0; i < array_length(effects); i++) {
-            var effect = effects[i];
-            agent[$ effect.name] = effect.newValue;
+    function ApplyEffects(value = undefined) {
+        for (var i = 0; i < array_length(currentAction.effects); i++) {
+            var effect = currentAction.effects[i];
+			var influence = value == undefined ? effect.newValue : value;
+            agent[$ effect.name] = influence;
         }
     }
 
@@ -129,20 +130,24 @@ function BehaviorSequencer(_designator, _agent, _exclusive, _completionDelay, _l
             return;
         }
         trace("All conditions met", _action.conditions);
+		
         var actionDelay = (delayOverride > 0) ? delayOverride : _action.actionDelay;
+		
         currentAction = _action;
+		
         var ts = time_source_create(time_source_game, actionDelay, time_source_units_seconds, function() {
             trace("Time source callback called", currentAction);
-            if (currentAction != noone) {
+            if (is_struct(currentAction)) {
                 var _msg = currentAction.message;
                 with agent _msg();
-                ApplyEffects(currentAction.effects);
-                agent.ai_brain.SatisfyDirective(currentAction);
+								
                 currentIndex++;
                 ExecuteNextAction(0);
             }
         });
+		
         time_source_start(ts);
+		
     }
 
     /// @function CompleteSequence()

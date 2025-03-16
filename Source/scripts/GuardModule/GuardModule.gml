@@ -1,31 +1,31 @@
 /// GuardModule equivalent in GML
 
 function GuardModule(_x, _y, _objective, _guardObjectiveTag, _objectiveSearchTime, _visionRange, _guardRange, _wanderInterval, _wanderWalkTime) constructor {
-    static objective = _objective;
-    static guardObjectiveTag = _guardObjectiveTag;
-    static objectiveSearchTime = _objectiveSearchTime;
-    static visionRange = _visionRange;
-    static guardRange = _guardRange;
-    static guardingRotation = 30.0;
-    static rotationVariance = 15.0;
-    static wanderInterval = _wanderInterval;
-    static wanderWalkTime = _wanderWalkTime;
-    static killTarget = noone;
-    static wandering = false;
-    static returning = false;
-    static autoLookAround = true;
-    static wander = true;
-    static objectivePosition = [0, 0];
-    static wanderCounter = wanderInterval;
-    static hunting = false;
-    static targetInView = false;
-    static targetInViewLastFrame = false;
-    static currentSearchTime = 0;
-    static targetSearchTime = 0;
-    static debug = true;
-    static x = _x;
-    static y = _y;
-    static direction = 0;
+    objective = _objective;
+    guardObjectiveTag = _guardObjectiveTag;
+    objectiveSearchTime = _objectiveSearchTime;
+    visionRange = _visionRange;
+    guardRange = _guardRange;
+    guardingRotation = 30.0;
+    rotationVariance = 15.0;
+    wanderInterval = _wanderInterval;
+    wanderWalkTime = _wanderWalkTime;
+    killTarget = noone;
+    wandering = false;
+    returning = false;
+    autoLookAround = true;
+    wander = true;
+    objectivePosition = [0, 0];
+    wanderCounter = wanderInterval;
+    hunting = false;
+    targetInView = false;
+    targetInViewLastFrame = false;
+    currentSearchTime = 0;
+    targetSearchTime = 0;
+    debug = true;
+    x = _x;
+    y = _y;
+    direction = 0;
     
     function OnEnable() {
         wandering = false;

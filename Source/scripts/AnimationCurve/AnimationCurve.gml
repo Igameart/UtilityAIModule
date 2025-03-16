@@ -1,10 +1,10 @@
 function AnimationCurve() constructor {
     // Create the animation curve asset
-    static curve = animcurve_create();
+    curve = animcurve_create();
     curve.name = "Custom_Curve";
 
     // Create the channel
-    static channel = animcurve_channel_new();
+    channel = animcurve_channel_new();
     channel.name = "default";
     channel.type = animcurvetype_catmullrom;
     channel.iterations = 8;

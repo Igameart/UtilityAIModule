@@ -2,15 +2,15 @@
 /// @description Creates a new utility module for an agent.
 /// @param {object} _agent The agent object.
 function UtilityModule(_agent) constructor {
-    static agent = _agent;
-    static directives = [];
-    static uniqueIdentifier = "";
-    static personalityName = "";
-    static nameDisplay = undefined;
-    static currentSequence = -1;
-    static highest = -1;
-    static selector = "";
-    static enabled = true;
+    agent = _agent;
+    directives = [];
+    uniqueIdentifier = "";
+    personalityName = "";
+    nameDisplay = undefined;
+    currentSequence = -1;
+    highest = -1;
+    selector = "";
+    enabled = true;
 
     /// @function Directive(_name, _changePerSec, _desiredObject, _desiredCount, _satisfactionValue, _lockUntilSatisfied, _valence, _sequencer, _sequenceName)
     /// @description Creates a new directive object.
@@ -180,6 +180,7 @@ function UtilityModule(_agent) constructor {
         for (var i = 0; i < array_length(directives); i++) {
             var _dir = directives[i];
             if (_dir.name == _directiveName) {
+				with _dir.sequencer ApplyEffects();
                 var _satisfy = _value == undefined ? _dir.satisfactionValue : _value;
                 _dir.valence -= _satisfy;
                 _dir.currentlyLocked = false;
